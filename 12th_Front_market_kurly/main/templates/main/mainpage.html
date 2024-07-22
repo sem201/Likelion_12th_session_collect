@@ -1,0 +1,110 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<!-- css 파일 -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/main/main_page.css'%}?after"
+/>
+
+<div id='product_lst_container'> <!-- 카테고리 선택 -->
+  <div id='new_product_lst'>
+    <button class='product_lst_item'>인기신상랭킹</button>
+    <button class='product_lst_item'>입점특가</button>
+    <button class='product_lst_item'>간편한끼</button>
+    <button class='product_lst_item'>요즘간식</button>
+    <button class='product_lst_item'>주방 리빙</button>
+    <button class='product_lst_item'>뷰티</button>
+    <button class='product_lst_item'>패션잡화</button>
+  </div>
+</div>
+<div class='screen' id='main_screen'>
+  <div id='main_page_container'> <!--width 220px-->
+    <div id='filter_container'> <!--사이드 바-->
+      <div id='filter'>
+        <div id='filter_text'>필터</div>
+        <div>
+          <img src="{% static 'assets/icons/reset.svg' %}" id='reset_img'/>
+          <button id='reset'>초기화</button>
+        </div>
+      </div>
+      <div id='category'>
+        <div id='category_container'>
+          <div id='category_text'>카테고리</div>
+          <div>
+            <button id='up'>
+              <img src="{% static 'assets/icons/up.svg' %}" id='up_img'/>
+            </button>
+          </div>
+        </div>
+        <div id='category_box'>
+          <label for="skin_care">
+            <input type="checkbox" name="group" id="skin_care" value='68'/>
+            스킨케어·메이크업 <p class='product_num'>68</p>
+          </label>
+          <label for="luxury">
+            <input type="checkbox" name="group" id="luxury" value='40'/>
+            럭셔리뷰티 <p class='product_num'>40</p>
+          </label>
+          <label for="snack">
+            <input type="checkbox" name="group" id="snack" value='28'/>
+            간식·과자·떡 <p class='product_num'>28</p>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id='main_bar'> <!-- width 783px-->
+      <div id='sorting_bar'> <!-- 정렬 파트 -->
+        <div id='total_product'>총 136건</div>
+        <div id='sorting_how'>
+          <button class='sorting_btn' id='clicked_soring_btn'>추천순</button>
+          <button class='sorting_btn'>신상품순</button>
+          <button class='sorting_btn'>판매량순</button>
+          <button class='sorting_btn'>혜택순</button>
+          <button class='sorting_btn'>낮은 가격순</button>
+          <button class='sorting_btn'>높은 가격순</button>
+        </div>
+      </div>
+      <div id='filter_lst_container'>
+        <div id='skin_care_text'>스킨케어·메이크업
+          <button id='skin_care_delbtn'>
+            <img src="{% static 'assets/icons/close.svg' %}" class='close_btn'/>
+          </button>
+        </div>
+        <div id='luxury_text'>럭셔리뷰티
+          <button id='luxury_delbtn'>
+            <img src="{% static 'assets/icons/close.svg' %}" class='close_btn'/>
+          </button>
+        </div>
+        <div id='snack_text'>간식·과자·떡
+          <button id='snack_delbtn'>
+            <img src="{% static 'assets/icons/close.svg' %}" class='close_btn'/>
+
+          </button>
+        </div>
+      </div>
+      <div id='item_list'> <!--물건 보여주는 부분-->
+        {% for product in products %}
+        <div class='item'>
+          <img src="{{product.image_url}}" style="width: 100px" 
+          class='product_img'/>
+          <div class='shopping_button'>
+            <button>
+              <img src="{% static 'assets/icons/cart.svg' %}" id='cart_img'/>담기
+            </button>
+          </div>
+          <a href="product/{{product.id}}">
+            <p id='delivery_company'>샛별배송<p> 
+            <p id='product_name'>{{product}}</p>
+            <p id='description'>{{product.description}}</p>
+            <p id='origin_price'>{{product.origin_price}}원</p>
+            <p id='discount_rate'>{{product.discount_rate}}%</p>
+            <p id='discount_price'>{{product.discount_price}}원</p>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/main/main_page.js'%}"></script>
+{% endblock %}
